@@ -1,17 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <b-container id="app-bg">
+      <h1>Weather cameras</h1>
+      <Weathercams />
+      <Weatherstations />
+      <small
+        >Data is powered by
+        <a href="https://www.digitraffic.fi/tieliikenne/">Digitraffic.fi</a>,
+        the open data of finnish road network</small
+      >
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Weathercams from "./components/Weatchercams";
+import Weatherstations from "./components/Weatherstations";
+import { BContainer } from "bootstrap-vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    Weathercams,
+    Weatherstations,
+    BContainer
   }
 };
 </script>
@@ -24,5 +36,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #141414;
+}
+
+#app-bg {
+  background-color: #e8e8e8;
 }
 </style>
