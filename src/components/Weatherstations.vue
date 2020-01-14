@@ -1,28 +1,38 @@
 <template>
   <b-container v-if="getStationSuccess">
-    <h5>Time: {{ timestamp }}</h5>
+    <h5>
+      <b-icon-clock></b-icon-clock>
+      {{ timestamp }}
+    </h5>
     <b-list-group>
       <b-list-group-item>
-        <b>Air:</b>
+        <b>Air temperature:</b>
         {{ temperatures.airValue }}{{ temperatures.unit }}
       </b-list-group-item>
       <b-list-group-item>
-        <b>Road:</b>
+        <b>Road temperature:</b>
         {{ temperatures.roadValue }}{{ temperatures.unit }}
       </b-list-group-item>
     </b-list-group>
   </b-container>
 </template>
 <script>
-import { BContainer, BListGroup, BListGroupItem } from "bootstrap-vue";
+import {
+  BContainer,
+  BListGroup,
+  BListGroupItem,
+  BIconClock
+} from "bootstrap-vue";
 import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "Weatherstations.vue",
   components: {
     BContainer,
     BListGroup,
-    BListGroupItem
+    BListGroupItem,
+    BIconClock
   },
   props: {
     stationID: Number
@@ -57,8 +67,9 @@ export default {
   },
   computed: {
     timestamp: function() {
-      console.log(this.stationData);
-      return this.stationData.weatherStations[0].measuredTime;
+      return moment(this.stationData.weatherStations[0].measuredTime).format(
+        "DD.MM.YYYY, h:mm:ss"
+      );
     },
     temperatures: function() {
       let base = this.stationData.weatherStations[0];
@@ -72,4 +83,8 @@ export default {
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+h5 {
+  text-align: center;
+}
+</style>

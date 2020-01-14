@@ -7,7 +7,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 // import bootstrap Vue
 import { BootstrapVue } from "bootstrap-vue";
 
-import store from './store'
+import store from "./store";
 Vue.config.productionTip = false;
 
 new Vue({

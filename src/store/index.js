@@ -19,7 +19,18 @@ export default new Vuex.Store({
     SET_CAMERAS(state, camerasMeta) {
       if (camerasMeta.data.features.length > 0) {
         camerasMeta.data.features.forEach(station => {
-          state.cameras.push(station);
+          state.cameras.push(
+            new Object({
+              id: station.properties.id,
+              roadStationId: station.properties.roadStationId,
+              municipality: station.properties.municipality,
+              province: station.properties.province,
+              name:
+                station.properties.names.fi != undefined
+                  ? station.properties.names.fi
+                  : "Unknown"
+            })
+          );
         });
       }
     },
