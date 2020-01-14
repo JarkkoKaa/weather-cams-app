@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container id="app-container">
-      <h1 id="app-title">Weather cameras</h1>
+      <h1 id="app-title">Kelikamerat</h1>
       <Weathercams />
     </b-container>
     <b-container id="app-footer">

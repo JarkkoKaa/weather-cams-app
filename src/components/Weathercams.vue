@@ -2,16 +2,16 @@
   <b-container>
     <b-row id="input-row">
       <b-col lg="5">
-        <label for="filter">Filter</label>
+        <label for="filter">Suodata</label>
         <b-form-input
           id="filter"
           v-model="filterStation"
           type="search"
-          placeholder="Filter by province or municipality"
+          placeholder="Suodata maakunnan tai kunnan mukaan"
         ></b-form-input>
       </b-col>
       <b-col lg="5">
-        <label for="select">Select location</label>
+        <label for="select">Valitse sijainti</label>
         <b-form-select v-model="selectedStation" id="select">
           <option
             v-for="station in getStations"
@@ -22,7 +22,7 @@
       </b-col>
       <b-col lg="2" class="mt-05">
         <b-button block variant="success" @click="getData">
-          Get
+          Hae
           <b-icon-search></b-icon-search>
         </b-button>
       </b-col>
