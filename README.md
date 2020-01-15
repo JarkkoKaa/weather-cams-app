@@ -1,4 +1,8 @@
-# weathercamsapp
+# weather cameras app : Kelikamerat
+
+Vue.js application based on open data from digitraffic.fi, which have REST interface for weather camera data and weather stations sensors measurements.
+
+Project is created with Vue CLI.
 
 ## Project setup
 
