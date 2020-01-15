@@ -8,7 +8,8 @@
       <small>
         Data is powered by
         <a href="https://www.digitraffic.fi/tieliikenne/">Digitraffic.fi</a>,
-        open data of the finnish road network
+        open data of the finnish road network | View projects
+        <a href="https://github.com/JarkkoKaa/weather-cams-app">GitHub repository</a>
       </small>
     </b-container>
   </div>
