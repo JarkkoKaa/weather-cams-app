@@ -21,7 +21,7 @@
         </b-form-select>
       </b-col>
       <b-col lg="2" class="mt-05">
-        <b-button block variant="success" @click="getData">
+        <b-button id="fetch-btn" block variant="success" @click="getData">
           Hae
           <b-icon-search></b-icon-search>
         </b-button>
@@ -162,5 +162,10 @@ export default {
 
 .ml-0 {
   padding-left: 0px;
+}
+@media only screen and (min-width: 992px) {
+  #fetch-btn {
+    margin-top: 20px;
+  }
 }
 </style>
