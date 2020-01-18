@@ -6,7 +6,7 @@
     </b-container>
     <b-container id="app-footer">
       <small>
-        Source of traffic data Traffic Management Finland / 
+        Source of traffic data <a href="https://tmfg.fi/fi">Traffic Management Finland</a> / 
         <a href="https://www.digitraffic.fi/tieliikenne/">Digitraffic.fi</a> , license CC 4.0 BY,
         open data of the finnish road network | View projects
         <a href="https://github.com/JarkkoKaa/weather-cams-app">GitHub repository</a>
