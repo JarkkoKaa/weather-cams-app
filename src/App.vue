@@ -6,10 +6,13 @@
     </b-container>
     <b-container id="app-footer">
       <small>
-        Source of traffic data <a href="https://tmfg.fi/fi">Traffic Management Finland</a> / 
+        Source of traffic data
+        <a href="https://tmfg.fi/fi">Traffic Management Finland</a> /
         <a href="https://www.digitraffic.fi/tieliikenne/">Digitraffic.fi</a> , license CC 4.0 BY,
         open data of the finnish road network | View projects
-        <a href="https://github.com/JarkkoKaa/weather-cams-app">GitHub repository</a>
+        <a
+          href="https://github.com/JarkkoKaa/weather-cams-app"
+        >GitHub repository</a>
       </small>
     </b-container>
   </div>
@@ -40,13 +43,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: #2c3e50;
-  background-image: url("./assets/bg-road-1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-x: center;
-  background-position-y: center;
   height: auto !important;
   min-height: 100%;
+}
+
+/* Showing background image is unnecessary when screen size is below 576px */
+@media only screen and (min-width: 576px) {
+  #app {
+    background-image: url("./assets/bg-road-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+  }
 }
 
 #app-container {
