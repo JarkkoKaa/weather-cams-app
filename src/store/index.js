@@ -13,7 +13,8 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
   state: {
     cameras: [],
-    stations: []
+    stations: [],
+    favourites: []
   },
   mutations: {
     SET_CAMERAS(state, camerasMeta) {
@@ -40,6 +41,12 @@ export default new Vuex.Store({
           state.stations.push(station);
         });
       }
+    },
+    SET_FAVOURITE(state, item) {
+      state.favourites.push(item);
+    },
+    REMOVE_FAVOURITE(state, item) {
+      state.favourites.splice(state.favourites.indexOf(item));
     }
   },
   actions: {
@@ -66,6 +73,12 @@ export default new Vuex.Store({
       if (stations.status == 200) {
         commit("SET_STATIONS", stations);
       }
+    },
+    addFavourite({ commit }, item) {
+      commit("SET_FAVOURITE", item);
+    },
+    removeFavourite({ commit }, item) {
+      commit("REMOVE_FAVOURITE", item);
     }
   },
   plugins: [vuexLocal.plugin]

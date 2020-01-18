@@ -2,7 +2,7 @@
   <b-container>
     <b-row id="input-row">
       <b-col lg="5">
-        <label for="filter">Suodata</label>
+        <label for="filter">Suodata sijainteja</label>
         <b-form-input
           id="filter"
           v-model="filterStation"
@@ -44,12 +44,18 @@
       </b-row>
       <b-row class="mt-05">
         <b-col id="img-col" class="ml-0" sm="12" lg="8">
+          <!-- TODO: uncomment in later release
+          <Favourites :favItem="selectedStation" />
+          -->
           <b-img thumbnail fluid :src="cameraPresets.img" alt="Weather cam image"></b-img>
         </b-col>
         <b-col class="ml-0" sm="12" lg="4">
           <Weatherstations v-bind:stationID="cameraPresets.nearestStation" />
         </b-col>
       </b-row>
+    </b-container>
+    <b-container>
+      <Loading :isLoading="loading" />
     </b-container>
   </b-container>
 </template>
@@ -70,11 +76,15 @@ import {
 import Weatherstations from "./Weatherstations.vue";
 import axios from "axios";
 import filterList from "../helpers/filterList";
+import Favourites from "./FavComponent";
+import Loading from "./LoadingComponent";
 
 export default {
-  name: "Weathercams.vue",
+  name: "Weathercams",
   components: {
     Weatherstations,
+    Favourites,
+    Loading,
     BContainer,
     BFormInput,
     BFormSelect,
@@ -91,6 +101,7 @@ export default {
     return {
       selectedStation: "",
       getStationSuccess: false,
+      loading: false,
       stationData: null,
       stationPreset: null,
       filterStation: "",
@@ -101,6 +112,8 @@ export default {
   methods: {
     async getData() {
       this.getStationSuccess = false;
+      this.loading = true;
+      // TODO:  set fetched items in cache and combine with favourites
       let result = await axios
         .get(process.env.VUE_APP_CAMERA_BASE + this.selectedStation)
         .then(function(response) {
@@ -115,6 +128,7 @@ export default {
         this.stationPreset = this.stationData.cameraStations[0];
         this.cameraPresetIndex = 0;
         this.getStationSuccess = true;
+        this.loading = false;
       }
     },
     selectCamera(index) {

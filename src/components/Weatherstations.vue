@@ -86,7 +86,6 @@ export default {
         this.stationData = result.data;
         this.getStationSuccess = true;
       }
-      console.log(this.stationData);
     }
   },
   mounted() {
