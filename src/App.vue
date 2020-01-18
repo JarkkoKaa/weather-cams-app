@@ -6,8 +6,8 @@
     </b-container>
     <b-container id="app-footer">
       <small>
-        Data is powered by
-        <a href="https://www.digitraffic.fi/tieliikenne/">Digitraffic.fi</a>,
+        Source of traffic data Traffic Management Finland / 
+        <a href="https://www.digitraffic.fi/tieliikenne/">Digitraffic.fi</a> , license CC 4.0 BY,
         open data of the finnish road network | View projects
         <a href="https://github.com/JarkkoKaa/weather-cams-app">GitHub repository</a>
       </small>
