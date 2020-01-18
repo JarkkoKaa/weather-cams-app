@@ -4,6 +4,11 @@ Vue.js application based on open data from digitraffic.fi, which have REST inter
 
 Project is created with Vue CLI.
 
+## coming features
+
+- User can sign up and sign in application
+- User can set and select favourite locations
+
 ## Project setup
 
 ```
@@ -41,3 +46,4 @@ npm run lint
 - Bootstrap-vue
 - Bootstrap
 - Axios
+- moment.js
