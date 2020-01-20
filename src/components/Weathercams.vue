@@ -26,7 +26,7 @@
           <b-icon-search></b-icon-search>
         </b-button>
       </b-col>
-      <b-col sm="12" v-if="this.$store.state.favourites.length > 0">
+      <b-col sm="12" v-if="this.$store.state.favourites.length > 0" style="margin-top: 10px;">
         <label for="fav-select">Suosikkisi:</label>
         <b-form-select v-model="selectedStation" id="fav-select" @change="getData">
           <option
