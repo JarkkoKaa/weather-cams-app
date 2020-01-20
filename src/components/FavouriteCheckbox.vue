@@ -13,7 +13,7 @@ import { BIconStar, BIconStarFill } from "bootstrap-vue";
 import findItems from "../functions/findItems";
 
 export default {
-  name: "FavComponent",
+  name: "FavouriteCheckbox",
   components: {
     BIconStar,
     BIconStarFill

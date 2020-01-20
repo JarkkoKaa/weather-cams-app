@@ -38,7 +38,7 @@
       </b-col>
     </b-row>
     <b-container v-if="getStationSuccess" id="camera-container" class="mt-05">
-      <b-row class="mt-05">
+      <b-row id="select-cameras-row" class="mt-05">
         <b-list-group horizontal>
           <b-list-group-item
             v-for="(camera, index) in stationPreset.cameraPresets"
@@ -56,7 +56,7 @@
         <b-col id="img-col" class="ml-0" sm="12" lg="8">
           <b-row id="user-btn-row">
             <b-col sm="12">
-              <Favourites :favId="cameraPresets.id" :favName="nameOfStation" />
+              <FavouriteCheckbox :favId="cameraPresets.id" :favName="nameOfStation" />
             </b-col>
           </b-row>
           <b-img thumbnail fluid :src="cameraPresets.img" alt="Weather cam image"></b-img>
@@ -88,7 +88,7 @@ import {
 import Weatherstations from "./Weatherstations.vue";
 import axios from "axios";
 import filterList from "../functions/filterList";
-import Favourites from "./FavComponent";
+import FavouriteCheckbox from "./FavouriteCheckbox";
 import Loading from "./LoadingComponent";
 import findItems from "../functions/findItems";
 
@@ -96,7 +96,7 @@ export default {
   name: "Weathercams",
   components: {
     Weatherstations,
-    Favourites,
+    FavouriteCheckbox,
     Loading,
     BContainer,
     BFormInput,
@@ -194,6 +194,10 @@ export default {
   #fetch-btn {
     margin-top: 22px;
   }
+}
+
+#select-cameras-row {
+  overflow: auto;
 }
 
 #user-btn-row {

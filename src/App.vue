@@ -75,4 +75,21 @@ body {
   background-color: #dbdbdb;
   padding: 1.5rem;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #b3b3b3;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #7a7a7a;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6b6b6b;
+}
 </style>
