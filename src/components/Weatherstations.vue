@@ -94,7 +94,7 @@ export default {
   computed: {
     timestamp: function() {
       return moment(this.stationData.weatherStations[0].measuredTime).format(
-        "DD.MM.YYYY, h:mm:ss"
+        "DD.MM.YYYY, HH:mm:ss"
       );
     },
     sensors: function() {
