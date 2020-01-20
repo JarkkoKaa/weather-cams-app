@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="fav-btn">
     <span id="add-fav" v-if="!isFavorited" class="fav-btn" @click="addFavourite">
       <b-icon-star></b-icon-star>Lisää suosikkeihin
     </span>
@@ -10,7 +10,7 @@
 </template>
 <script>
 import { BIconStar, BIconStarFill } from "bootstrap-vue";
-import checkFav from "../helpers/checkFav";
+import findItems from "../functions/findItems";
 
 export default {
   name: "FavComponent",
@@ -19,19 +19,21 @@ export default {
     BIconStarFill
   },
   props: {
-    favItem: String
+    favId: String,
+    favName: String
   },
   methods: {
     addFavourite() {
-      this.$store.dispatch("addFavourite", this.favItem);
+      let fav = new Object({ id: this.favId, name: this.favName });
+      this.$store.dispatch("addFavourite", fav);
     },
     removeFavourite() {
-      this.$store.dispatch("removeFavourite", this.favItem);
+      this.$store.dispatch("removeFavourite", this.favId);
     }
   },
   computed: {
     isFavorited() {
-      return checkFav(this.favItem);
+      return findItems.fetchFav(this.favId);
     }
   }
 };

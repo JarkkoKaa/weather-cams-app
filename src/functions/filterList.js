@@ -5,8 +5,7 @@ function filterList(list, filter) {
   for (let i = 0; i < list.length; i++) {
     if (
       list[i].municipality.toUpperCase().includes(filter.toUpperCase()) ||
-      list[i].province.toUpperCase().includes(filter.toUpperCase()) ||
-      list[i].name.match(filter)
+      list[i].province.toUpperCase().includes(filter.toUpperCase())
     )
       filteredList.push(list[i]);
   }

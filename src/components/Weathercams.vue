@@ -12,7 +12,7 @@
       </b-col>
       <b-col lg="5">
         <label for="select">Valitse sijainti</label>
-        <b-form-select v-model="selectedStation" id="select">
+        <b-form-select v-model="selectedStation" @change="getData" id="select">
           <option
             v-for="station in getStations"
             :value="station.id"
@@ -25,6 +25,16 @@
           Hae
           <b-icon-search></b-icon-search>
         </b-button>
+      </b-col>
+      <b-col sm="12" v-if="this.$store.state.favourites.length > 0">
+        <label for="fav-select">Suosikkisi:</label>
+        <b-form-select v-model="selectedStation" id="fav-select" @change="getData">
+          <option
+            v-for="station in this.$store.state.favourites"
+            :value="station.id"
+            :key="station.id"
+          >{{ station.name }}</option>
+        </b-form-select>
       </b-col>
     </b-row>
     <b-container v-if="getStationSuccess" id="camera-container" class="mt-05">
@@ -44,9 +54,11 @@
       </b-row>
       <b-row class="mt-05">
         <b-col id="img-col" class="ml-0" sm="12" lg="8">
-          <!-- TODO: uncomment in later release
-          <Favourites :favItem="selectedStation" />
-          -->
+          <b-row id="user-btn-row">
+            <b-col sm="12">
+              <Favourites :favId="cameraPresets.id" :favName="nameOfStation" />
+            </b-col>
+          </b-row>
           <b-img thumbnail fluid :src="cameraPresets.img" alt="Weather cam image"></b-img>
         </b-col>
         <b-col class="ml-0" sm="12" lg="4">
@@ -75,9 +87,10 @@ import {
 } from "bootstrap-vue";
 import Weatherstations from "./Weatherstations.vue";
 import axios from "axios";
-import filterList from "../helpers/filterList";
+import filterList from "../functions/filterList";
 import Favourites from "./FavComponent";
 import Loading from "./LoadingComponent";
+import findItems from "../functions/findItems";
 
 export default {
   name: "Weathercams",
@@ -102,7 +115,6 @@ export default {
       selectedStation: "",
       getStationSuccess: false,
       loading: false,
-      stationData: null,
       stationPreset: null,
       filterStation: "",
       selectedCamera: "",
@@ -113,7 +125,6 @@ export default {
     async getData() {
       this.getStationSuccess = false;
       this.loading = true;
-      // TODO:  set fetched items in cache and combine with favourites
       let result = await axios
         .get(process.env.VUE_APP_CAMERA_BASE + this.selectedStation)
         .then(function(response) {
@@ -124,8 +135,7 @@ export default {
         });
 
       if (result.status == 200) {
-        this.stationData = result.data;
-        this.stationPreset = this.stationData.cameraStations[0];
+        this.stationPreset = result.data.cameraStations[0];
         this.cameraPresetIndex = 0;
         this.getStationSuccess = true;
         this.loading = false;
@@ -149,11 +159,14 @@ export default {
     getStations() {
       return filterList(this.$store.state.cameras, this.filterStation);
     },
+    nameOfStation() {
+      return findItems.fetchName(this.stationPreset.id);
+    },
     cameraPresets() {
       let presets = {
         name: this.stationPreset.cameraPresets[this.cameraPresetIndex]
           .presentationName,
-        id: this.stationPreset.cameraPresets[this.cameraPresetIndex].id,
+        id: this.stationPreset.id,
         img: this.stationPreset.cameraPresets[this.cameraPresetIndex].imageUrl,
         time: this.stationPreset.cameraPresets[this.cameraPresetIndex]
           .measuredTime,
@@ -181,5 +194,9 @@ export default {
   #fetch-btn {
     margin-top: 22px;
   }
+}
+
+#user-btn-row {
+  align-items: center;
 }
 </style>
