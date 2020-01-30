@@ -1,30 +1,8 @@
 <template>
   <b-container>
     <b-row id="input-row">
-      <b-col lg="5">
-        <label for="filter">Suodata sijainteja</label>
-        <b-form-input
-          id="filter"
-          v-model="filterStation"
-          type="search"
-          placeholder="Suodata maakunnan tai kunnan mukaan"
-        ></b-form-input>
-      </b-col>
-      <b-col lg="5">
-        <label for="select">Valitse sijainti</label>
-        <b-form-select v-model="selectedStation" @change="getData" id="select">
-          <option
-            v-for="station in getStations"
-            :value="station.id"
-            :key="station.roadStationId"
-          >{{ station.municipality }}, {{ station.province }}: {{ station.name }}</option>
-        </b-form-select>
-      </b-col>
-      <b-col lg="2" class="mt-05">
-        <b-button id="fetch-btn" block variant="success" @click="getData">
-          Hae
-          <b-icon-search></b-icon-search>
-        </b-button>
+      <b-col sm="12">
+        <SearchInput @selectedStation="getData" />
       </b-col>
       <b-col sm="12" v-if="this.$store.state.favourites.length > 0" style="margin-top: 10px;">
         <label for="fav-select">Suosikkisi:</label>
@@ -74,23 +52,20 @@
 <script>
 import {
   BContainer,
-  BFormInput,
   BFormSelect,
-  BButton,
   BRow,
   BCol,
   BImg,
   BListGroup,
   BListGroupItem,
-  BIconSearch,
   BIconCameraVideo
 } from "bootstrap-vue";
 import Weatherstations from "./Weatherstations.vue";
 import axios from "axios";
-import filterList from "../functions/filterList";
 import FavouriteCheckbox from "./FavouriteCheckbox";
 import Loading from "./LoadingComponent";
 import findItems from "../functions/findItems";
+import SearchInput from "./SearchInput";
 
 export default {
   name: "Weathercams",
@@ -98,31 +73,30 @@ export default {
     Weatherstations,
     FavouriteCheckbox,
     Loading,
+    SearchInput,
     BContainer,
-    BFormInput,
     BFormSelect,
-    BButton,
     BRow,
     BCol,
     BImg,
     BListGroup,
     BListGroupItem,
-    BIconSearch,
     BIconCameraVideo
   },
   data() {
     return {
-      selectedStation: "",
       getStationSuccess: false,
       loading: false,
       stationPreset: null,
       filterStation: "",
       selectedCamera: "",
-      cameraPresetIndex: 0
+      cameraPresetIndex: 0,
+      selectedStation: ""
     };
   },
   methods: {
-    async getData() {
+    async getData(id) {
+      if (id) this.selectedStation = id;
       this.getStationSuccess = false;
       this.loading = true;
       let result = await axios
@@ -149,16 +123,7 @@ export default {
     if (!window.sessionStorage.getItem("weather-cam-data"))
       this.$store.dispatch("getMetaStation");
   },
-  watch: {
-    filterStation: function() {
-      if (this.getStations.length > 0)
-        this.selectedStation = this.getStations[0].id;
-    }
-  },
   computed: {
-    getStations() {
-      return filterList(this.$store.state.cameras, this.filterStation);
-    },
     nameOfStation() {
       return findItems.fetchName(this.stationPreset.id);
     },
@@ -189,11 +154,6 @@ export default {
 
 .ml-0 {
   padding-left: 0px;
-}
-@media only screen and (min-width: 992px) {
-  #fetch-btn {
-    margin-top: 22px;
-  }
 }
 
 #select-cameras-row {
