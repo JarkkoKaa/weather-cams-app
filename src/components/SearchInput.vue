@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import filterList from "../functions/filterList";
+import filterList from "../helpers/filterList";
 import { BFormInput } from "bootstrap-vue";
 
 export default {

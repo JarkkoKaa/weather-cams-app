@@ -54,7 +54,7 @@ import {
   BListGroupItem,
   BIconClock
 } from "bootstrap-vue";
-import apiCalls from "../functions/apiCalls";
+import apiCalls from "../helpers/apiCalls";
 import moment from "moment";
 
 export default {
@@ -113,7 +113,7 @@ export default {
         precipitationIntensity: null,
         unitPI: null
       });
-      console.log("data object: ", base);
+
       for (let i = 0; i < base.length; i++) {
         if (base[i].id == 1) {
           data.airValue = base[i].sensorValue;

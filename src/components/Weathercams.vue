@@ -63,9 +63,9 @@ import {
 import Weatherstations from "./Weatherstations.vue";
 import FavouriteCheckbox from "./FavouriteCheckbox";
 import Loading from "./LoadingComponent";
-import findItems from "../functions/findItems";
+import findItems from "../helpers/findItems";
 import SearchInput from "./SearchInput";
-import apiCalls from "../functions/apiCalls";
+import apiCalls from "../helpers/apiCalls";
 
 export default {
   name: "Weathercams",

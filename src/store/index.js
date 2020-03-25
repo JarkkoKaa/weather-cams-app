@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
-import apiCalls from "../functions/apiCalls";
+import apiCalls from "../helpers/apiCalls";
 
 Vue.use(Vuex);
 

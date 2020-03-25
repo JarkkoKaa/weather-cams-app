@@ -10,8 +10,7 @@
 </template>
 <script>
 import { BIconStar, BIconStarFill } from "bootstrap-vue";
-import findItems from "../functions/findItems";
-
+import findItems from "../helpers/findItems";
 export default {
   name: "FavouriteCheckbox",
   components: {
