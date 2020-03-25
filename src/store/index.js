@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 const vuexLocal = new VuexPersistence({
   key: "weather-cam-data",
-  storage: window.sessionStorage
+  storage: window.localStorage
 });
 
 export default new Vuex.Store({

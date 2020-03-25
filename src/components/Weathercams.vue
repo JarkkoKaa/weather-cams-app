@@ -120,7 +120,7 @@ export default {
     }
   },
   mounted() {
-    if (!window.sessionStorage.getItem("weather-cam-data"))
+    if (!window.localStorage.getItem("weather-cam-data"))
       this.$store.dispatch("getMetaStation");
   },
   computed: {
