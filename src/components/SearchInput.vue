@@ -67,7 +67,6 @@ export default {
   padding: 0px;
   margin-top: 2px;
   overflow-y: auto;
-  font-weight: 600;
 }
 
 .show-results > li {

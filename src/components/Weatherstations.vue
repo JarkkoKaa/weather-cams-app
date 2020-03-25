@@ -50,7 +50,7 @@ import {
   BListGroupItem,
   BIconClock
 } from "bootstrap-vue";
-import axios from "axios";
+import apiCalls from "../functions/apiCalls";
 import moment from "moment";
 
 export default {
@@ -73,14 +73,7 @@ export default {
   methods: {
     async getData() {
       this.getStationSuccess = false;
-      let result = await axios
-        .get(process.env.VUE_APP_STATIONS_BASE + this.stationID)
-        .then(function(response) {
-          return response;
-        })
-        .catch(function(error) {
-          console.log("error: ", error);
-        });
+      let result = await apiCalls.getWeatherStations(this.stationID);
 
       if (result.status == 200) {
         this.stationData = result.data;

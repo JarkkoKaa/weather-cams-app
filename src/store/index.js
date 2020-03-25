@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
-import axios from "axios";
+import apiCalls from "../functions/apiCalls";
 
 Vue.use(Vuex);
 
@@ -55,25 +55,11 @@ export default new Vuex.Store({
   },
   actions: {
     async getMetaStation({ commit }) {
-      let cameras = await axios
-        .get(process.env.VUE_APP_CAMERA_META)
-        .then(function(response) {
-          return response;
-        })
-        .catch(function(error) {
-          console.log("error: ", error);
-        });
+      let cameras = await apiCalls.getCamerasMeta();
       if (cameras.status == 200) {
         commit("SET_CAMERAS", cameras);
       }
-      let stations = await axios
-        .get(process.env.VUE_APP_STATIONS_META)
-        .then(function(response) {
-          return response;
-        })
-        .catch(function(error) {
-          console.log("error: ", error);
-        });
+      let stations = await apiCalls.getStationsMeta();
       if (stations.status == 200) {
         commit("SET_STATIONS", stations);
       }

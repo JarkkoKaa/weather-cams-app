@@ -37,7 +37,7 @@
               <FavouriteCheckbox :favId="cameraPresets.id" :favName="nameOfStation" />
             </b-col>
           </b-row>
-          <b-img thumbnail fluid :src="cameraPresets.img" alt="Weather cam image"></b-img>
+          <b-img fluid :src="cameraPresets.img" alt="Weather cam image"></b-img>
         </b-col>
         <b-col class="ml-0" sm="12" lg="4">
           <Weatherstations v-bind:stationID="cameraPresets.nearestStation" />
@@ -61,11 +61,11 @@ import {
   BIconCameraVideo
 } from "bootstrap-vue";
 import Weatherstations from "./Weatherstations.vue";
-import axios from "axios";
 import FavouriteCheckbox from "./FavouriteCheckbox";
 import Loading from "./LoadingComponent";
 import findItems from "../functions/findItems";
 import SearchInput from "./SearchInput";
+import apiCalls from "../functions/apiCalls";
 
 export default {
   name: "Weathercams",
@@ -99,14 +99,7 @@ export default {
       if (id) this.selectedStation = id;
       this.getStationSuccess = false;
       this.loading = true;
-      let result = await axios
-        .get(process.env.VUE_APP_CAMERA_BASE + this.selectedStation)
-        .then(function(response) {
-          return response;
-        })
-        .catch(function(error) {
-          console.log("error: ", error);
-        });
+      let result = await apiCalls.getWeatherCams(id);
 
       if (result.status == 200) {
         this.stationPreset = result.data.cameraStations[0];
