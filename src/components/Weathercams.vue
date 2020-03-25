@@ -44,7 +44,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <b-container>
+    <b-container class="d-flex justify-content-center align-items-center">
       <Loading :isLoading="loading" />
     </b-container>
   </b-container>
