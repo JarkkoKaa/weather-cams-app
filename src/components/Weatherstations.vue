@@ -26,8 +26,12 @@
         {{ sensors.freezingPoint }}{{ sensors.unitTemperature }}
       </b-list-group-item>
       <b-list-group-item v-if="sensors.averageWind">
-        <b>Keskituuli:</b>
+        <b>Tuulen keskinopeus:</b>
         {{ sensors.averageWind }} {{ sensors.unitWind }}
+      </b-list-group-item>
+      <b-list-group-item v-if="sensors.maxWind">
+        <b>Tuulen maksiminopeus:</b>
+        {{ sensors.maxWind }} {{ sensors.unitWind }}
       </b-list-group-item>
       <b-list-group-item>
         <b>Sade:</b>
@@ -101,6 +105,7 @@ export default {
         dewPoint: null,
         freezingPoint: null,
         averageWind: null,
+        maxWind: null,
         unitWind: null,
         humidity: null,
         unitHumidity: null,
@@ -108,7 +113,7 @@ export default {
         precipitationIntensity: null,
         unitPI: null
       });
-
+      console.log("data object: ", base);
       for (let i = 0; i < base.length; i++) {
         if (base[i].id == 1) {
           data.airValue = base[i].sensorValue;
@@ -122,6 +127,7 @@ export default {
           data.averageWind = base[i].sensorValue;
           data.unitWind = base[i].sensorUnit;
         }
+        if (base[i].id == 17) data.maxWind = base[i].sensorValue;
         if (base[i].id == 21) {
           (data.humidity = base[i].sensorValue),
             (data.unitHumidity = base[i].sensorUnit);
